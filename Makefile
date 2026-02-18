@@ -6,7 +6,7 @@ include $(THEOS)/makefiles/common.mk
 TWEAK_NAME = RawMouse
 RawMouse_FILES = Tweak.x
 RawMouse_CFLAGS = -fobjc-arc
-# ESTA LINHA É A CHAVE PARA RESOLVER O ERRO DE LINKING:
+# ESSA LINHA É A CHAVE DO SUCESSO:
 RawMouse_FRAMEWORKS = UIKit CoreFoundation IOKit
 
 include $(THEOS_MAKE_PATH)/tweak.mk
