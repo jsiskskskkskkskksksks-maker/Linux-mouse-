@@ -10,7 +10,7 @@ extern float IOHIDEventGetFloatValue(IOHIDEventRef event, uint32_t field);
     if (IOHIDEventGetType(event) == 11) {
         float deltaX = IOHIDEventGetFloatValue(event, 0x0B0001);
         float deltaY = IOHIDEventGetFloatValue(event, 0x0B0002);
-        NSLog(@"[RawMouse] Movimento: X:%f Y:%f", deltaX, deltaY);
+        NSLog(@"[RawMouse] X: %f Y: %f", deltaX, deltaY);
     }
     %orig;
 }
@@ -18,6 +18,6 @@ extern float IOHIDEventGetFloatValue(IOHIDEventRef event, uint32_t field);
 
 %hook BCWindowServerPointerController
 - (void)setGlobalPointerOpacity:(double)arg1 {
-    %orig(0.0); // Deixa o cursor nativo invisível
+    %orig(0.0);
 }
 %end
