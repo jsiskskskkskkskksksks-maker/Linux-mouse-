@@ -1,7 +1,6 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-// Isso diz ao compilador para procurar as funções no sistema do iPad
 extern "C" {
     typedef struct __IOHIDEvent *IOHIDEventRef;
     uint32_t IOHIDEventGetType(IOHIDEventRef event);
@@ -10,11 +9,10 @@ extern "C" {
 
 %hook IOHIDEventSystemClient
 - (void)handleEvent:(IOHIDEventRef)event {
-    if (IOHIDEventGetType(event) == 11) {
-        // 0x0B0001 e 0x0B0002 são os códigos para X e Y relativo
+    if (event != NULL && IOHIDEventGetType(event) == 11) {
         float deltaX = IOHIDEventGetFloatValue(event, 0x0B0001);
         float deltaY = IOHIDEventGetFloatValue(event, 0x0B0002);
-        NSLog(@"[RawMouse] Movimento Detectado: DX:%f DY:%f", deltaX, deltaY);
+        NSLog(@"[RawMouse] X: %f Y: %f", deltaX, deltaY);
     }
     %orig;
 }
@@ -22,6 +20,6 @@ extern "C" {
 
 %hook BCWindowServerPointerController
 - (void)setGlobalPointerOpacity:(double)arg1 {
-    %orig(0.0); // Esconde a bolinha cinza
+    %orig(0.0);
 }
 %end
