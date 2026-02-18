@@ -1,10 +1,10 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-// Definições genéricas para o compilador não reclamar
+// Declarações simples para o robô não travar
 typedef struct __IOHIDEvent *IOHIDEventRef;
-extern "C" uint32_t IOHIDEventGetType(IOHIDEventRef event);
-extern "C" float IOHIDEventGetFloatValue(IOHIDEventRef event, uint32_t field);
+uint32_t IOHIDEventGetType(IOHIDEventRef event);
+float IOHIDEventGetFloatValue(IOHIDEventRef event, uint32_t field);
 
 %hook IOHIDEventSystemClient
 - (void)handleEvent:(IOHIDEventRef)event {
