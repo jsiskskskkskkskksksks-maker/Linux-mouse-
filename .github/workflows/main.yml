@@ -22,5 +22,10 @@ jobs:
       - name: Save
         uses: actions/upload-artifact@v4
         with:
+          name: RawMouse-Installer      - name: Save
+        uses: actions/upload-artifact@v4
+        with:
           name: RawMouse-Installer
+          path: packages/*.deb
+
           path: packages/*.deb
