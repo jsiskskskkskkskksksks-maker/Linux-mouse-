@@ -1,0 +1,8 @@
+Package: com.jsis.rawmouse
+Name: RawMouse
+Version: 0.1.0
+Architecture: iphoneos-arm64
+Description: Transforma o mouse do iPad em um mouse de PC.
+Maintainer: jsis
+Author: jsis
+Section: Tweaks
