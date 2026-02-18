@@ -1,6 +1,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+// Definições necessárias para o robô entender o mouse
 extern "C" {
     typedef struct __IOHIDEvent *IOHIDEventRef;
     uint32_t IOHIDEventGetType(IOHIDEventRef event);
@@ -12,7 +13,7 @@ extern "C" {
     if (event != NULL && IOHIDEventGetType(event) == 11) {
         float deltaX = IOHIDEventGetFloatValue(event, 0x0B0001);
         float deltaY = IOHIDEventGetFloatValue(event, 0x0B0002);
-        NSLog(@"[RawMouse] X: %f Y: %f", deltaX, deltaY);
+        NSLog(@"[RawMouse] Movimento: X:%f Y:%f", deltaX, deltaY);
     }
     %orig;
 }
@@ -20,6 +21,6 @@ extern "C" {
 
 %hook BCWindowServerPointerController
 - (void)setGlobalPointerOpacity:(double)arg1 {
-    %orig(0.0);
+    %orig(0.0); // Deixa o cursor invisível
 }
 %end
