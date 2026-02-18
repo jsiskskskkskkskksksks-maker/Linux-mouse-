@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-// Isso resolve os erros de "unknown type" e "undeclared function" das suas fotos
+// Isso resolve os erros das linhas 22, 25 e 28 das suas fotos
 extern "C" {
     typedef struct __IOHIDEvent *IOHIDEventRef;
     uint32_t IOHIDEventGetType(IOHIDEventRef event);
@@ -11,7 +11,6 @@ extern "C" {
 %hook IOHIDEventSystemClient
 - (void)handleEvent:(IOHIDEventRef)event {
     if (event != NULL) {
-        // 11 é o tipo de evento para movimento de ponteiro/mouse
         if (IOHIDEventGetType(event) == 11) {
             float deltaX = IOHIDEventGetFloatValue(event, 0x0B0001);
             float deltaY = IOHIDEventGetFloatValue(event, 0x0B0002);
@@ -24,6 +23,6 @@ extern "C" {
 
 %hook BCWindowServerPointerController
 - (void)setGlobalPointerOpacity:(double)arg1 {
-    %orig(0.0); // Esconde a bolinha do cursor nativo
+    %orig(0.0); // Deixa o cursor nativo invisível
 }
 %end
