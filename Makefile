@@ -3,10 +3,8 @@ TARGET := iphone:clang:latest:14.0
 
 include $(THEOS)/makefiles/common.mk
 
-TWEAK_NAME = RawMouse
-RawMouse_FILES = Tweak.x
-RawMouse_CFLAGS = -fobjc-arc
-# ESSA LINHA É A CHAVE DO SUCESSO:
-RawMouse_FRAMEWORKS = UIKit CoreFoundation IOKit
+APPLICATION_NAME = MouseLinux
+MouseLinux_FILES = main.m AppDelegate.m RootViewController.m
+MouseLinux_FRAMEWORKS = UIKit CoreGraphics IOKit
 
-include $(THEOS_MAKE_PATH)/tweak.mk
+include $(THEOS_MAKE_PATH)/application.mk
